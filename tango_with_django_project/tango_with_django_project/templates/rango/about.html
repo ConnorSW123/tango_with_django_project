@@ -3,8 +3,6 @@
 
 {% block title_block %}
     About Rango
-    
-   
 {% endblock %}
 
 
@@ -12,6 +10,8 @@
 
     <h1>Rango says...</h1>
     <strong>{{ boldmessage }}</strong><br /> 
+    <h2>Welcome to the Rango About Page</h2>
+    <p>Visits: {{ visits }}</p>
     
     <!-- Static image of Rango -->
     <img src="{% static "images/rango.jpg" %}" alt="Picture of Rango" />
