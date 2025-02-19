@@ -19,6 +19,8 @@ from django.urls import include
 from rango import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+
   
 
 urlpatterns = [
@@ -27,4 +29,7 @@ urlpatterns = [
     path('rango/', include('rango.urls')),
     # The above maps any URLs starting with rango/ to be handled by rango.
     path('admin/', admin.site.urls),
+    path('accounts/', include('registration.backends.simple.urls')),
+    path('password_change/', auth_views.PasswordChangeView.as_view(template_name='registration/password_change_form.html'), name='password_change'),
+    path('password_change_done/', auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'), name='password_change_done'),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

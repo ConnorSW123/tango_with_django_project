@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from rango.models import Category, Page
 from rango.forms import CategoryForm, PageForm
 from django.urls import reverse
-from rango.forms import UserForm, UserProfileForm
-from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse
+#from rango.forms import UserForm, UserProfileForm
+#from django.contrib.auth import authenticate, login, logout
+#from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 
@@ -94,7 +94,7 @@ def add_category(request):
 
     return render(request, 'rango/add_category.html', {'form': form}) 
 
-def register(request):
+""" def register(request):
     # A boolean value for telling the template
     # whether the registration was successful.
     # Set to False intially. Code changes value to
@@ -153,8 +153,8 @@ def register(request):
                   context = {'user_form': user_form,
                              'profile_form': profile_form,
                              'registered': registered})
-
-def user_login(request):
+ """
+""" def user_login(request):
         # If the request is a HTTP POST, try to pull out the relevant information.
         if request.method == 'POST':
             # Gather the username and password provided by the user.
@@ -195,14 +195,14 @@ def user_login(request):
             # No context variables to pass to the template system, hence the
             # blank dictionary object...
             return render(request, 'rango/login.html')
-        
+         """
 
-@login_required
+""" @login_required
 def user_logout(request):
     # Since we know the user is logged in, we can just log them out.
     logout(request)
     # Take the user back to the homepage.
-    return redirect(reverse('rango:index'))
+    return redirect(reverse('rango:index')) """
 
 @login_required
 def restricted(request):
