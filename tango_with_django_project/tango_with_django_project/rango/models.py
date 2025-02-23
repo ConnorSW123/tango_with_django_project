@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib import admin
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from django import forms
+
 
 
 class Category(models.Model):
@@ -50,6 +52,6 @@ class UserProfile(models.Model):
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
     def __str__(self):
-        return self.user.username
-    
+        return self.user.username  # Now displays the username in Django Admin
+
 
