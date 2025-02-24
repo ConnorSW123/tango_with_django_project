@@ -15,12 +15,28 @@
     <strong>{{ boldmessage }}</strong><br /> 
     <h2>Welcome to the Rango About Page</h2>
     <p>Visits: {{ visits }}</p>
+
+    <button class="btn btn-primary" 
+            onclick="alert('You clicked the button using inline JavaScript.');"> 
+        Click me- I run on vanilla JavaScript! 
+    </button>
+    <br />
+
+    <button class="btn btn-primary" id="about-btn"> 
+        Click me- I'm using JQuery! 
+    </button>
+    <br />
     
     <!-- Static image of Rango -->
     <img src="{% static "images/rango.jpg" %}" alt="Picture of Rango" />
 
     <!-- Line for your name -->
     <p>This tutorial has been put together by <strong>Connor Sweeney</strong>.</p>
+    
+    <br />
+    <div id="msg">Hello! I'm a further example for JQuery testing.</div>
+
+
     
     <!-- Media image of a cat -->
      <img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of a Cat." /> 
