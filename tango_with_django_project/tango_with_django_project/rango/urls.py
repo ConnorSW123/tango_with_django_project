@@ -20,6 +20,7 @@ urlpatterns = [
     path('accounts/register/', RegisterProfileView.as_view(), name='register'),
     #path('logout/', views.user_logout, name='logout')
     path('profile/<username>/', views.ProfileView.as_view(), name='profile'),
-    path('profiles/', views.ListProfilesView.as_view(), name='list_profiles')
+    path('profiles/', views.ListProfilesView.as_view(), name='list_profiles'),
+    path('search_add_page/', views.SearchAddPageView.as_view(), name='search_add_page'),
 
     ]

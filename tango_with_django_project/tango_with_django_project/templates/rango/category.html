@@ -46,7 +46,7 @@
             </form>
         </div>
 
-        <div>
+        <div id="page-listing"> <!-- For AJAX page adding functionality. -->
             {% if result_list %}
                 <h2>Results</h2>
                 <div class="list-group">
@@ -59,6 +59,7 @@
                             </h3>
                             <p class="list-group-item-text">
                                 {{ result.summary|safe|escape }}
+                                <button class="btn btn-info btn-sm rango-page-add" type="button" data-categoryid="{{ category.id }}" data-title="{{ result.title }}" data-url="{{ result.link }}">Add</button>
                             </p>
                         </div>
                     {% endfor %}
