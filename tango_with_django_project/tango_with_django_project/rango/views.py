@@ -12,6 +12,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib.auth.models import User
 from rango.models import UserProfile
+from django.utils import timezone
 
 def index(request):
 
@@ -160,7 +161,7 @@ def goto_url(request):
             selected_page = Page.objects.get(id=page_id)
         except Page.DoesNotExist:
             return redirect(reverse('rango:index'))
-
+        selected_page.last_visit = timezone.now()
         selected_page.views = selected_page.views + 1
         selected_page.save()
 

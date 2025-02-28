@@ -3,6 +3,8 @@ from django.contrib import admin
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django import forms
+from django.utils import timezone
+
 
 
 
@@ -15,6 +17,9 @@ class Category(models.Model):
 
     
     def save(self, *args, **kwargs):
+         # Ensure that views is non-negative
+        if self.views < 0:
+            self.views = 0
         self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
     class Meta:
@@ -29,6 +34,7 @@ class Page(models.Model):
     title = models.CharField(max_length=TITLE_MAX_LENGTH)
     url = models.URLField() 
     views = models.IntegerField(default=0) 
+    last_visit = models.DateTimeField(default=timezone.now)
 
     class Meta:
         verbose_name_plural = 'pages'
