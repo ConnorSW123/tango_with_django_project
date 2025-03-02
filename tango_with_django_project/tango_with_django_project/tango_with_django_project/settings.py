@@ -34,12 +34,21 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_g9@+u1jlxf9hpt56ebx8=p0z95*e#+xf#07t##-r&-)+u!-r*'
-
+# CHAPTER 19 ADDITION
+# SECRET KEY USED TO RUN PRODUCTION - Instead Read Key from secret.key
+key = None  
+with open('secret.key') as f:
+    key = f.read().strip() 
+SECRET_KEY = key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# CHAPTER 19 ADDITION
+#TO DO: Change this to the username of the PythonAnywhere Account we plan on hosting our WebApp.
+# First Item is a PythonAnywhere Hosting URL - Using mine as default/placeholder at the moment.
+# Second Item is device port for hosting webapp locally - Do not remove or Webapp will not host locally.
+
+ALLOWED_HOSTS = ['ConnorSweeney.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition
