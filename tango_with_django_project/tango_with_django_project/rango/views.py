@@ -7,7 +7,7 @@ from django.urls import reverse
 #from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from rango.bing_search import run_query
+from rango.bing_search import run_query # Ensure you import your Bing search function
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib.auth.models import User
@@ -138,6 +138,8 @@ def visitor_cookie_handler(request):
     last_visit_cookie = get_server_side_cookie(request, 'last_visit',str(datetime.now()))
     last_visit_time = datetime.strptime(last_visit_cookie[:-7],'%Y-%m-%d %H:%M:%S')
 
+
+    # Chapter 
     # If it's been more than a day since the last visit...
     if (datetime.now() - last_visit_time).days > 0:
         visits = visits + 1
@@ -151,8 +153,11 @@ def visitor_cookie_handler(request):
     request.session['visits'] = visits
 
 
-from django.shortcuts import render
-from .bing_search import run_query  # Ensure you import your Bing search function
+
+#CHAPTER 14 ADDITION 
+#Goto view is used to manage and redirects clicks via different urls - 
+# this view intercepts the clicked link, modifys the selected page's timezone, last_visit and views 
+# After saving the page, the view redirects the user to their requested URL.
 
 
 def goto_url(request):
@@ -172,7 +177,8 @@ def goto_url(request):
     return redirect(reverse('rango:index'))
 
 
-
+#CHAPTER 14/15 ADDITION - Converting Views to Class Structure
+# Note that both the class version and function versions are both not required for full operation.
 
 
 class AboutView(View):
@@ -302,6 +308,7 @@ class GotoUrlView(View):
         except Page.DoesNotExist:
             return redirect(reverse('rango:index'))
 
+        selected_page.last_visit = timezone.now()
         selected_page.views = selected_page.views + 1
         selected_page.click_count = selected_page.click_count + 1
 
@@ -311,6 +318,10 @@ class GotoUrlView(View):
 
     def post(self, request):
         return redirect(reverse('rango:index'))
+    
+
+#CHAPTER 14/15 Additions 
+# Adding User Profile functionality - most of these views can be directly copied over for our project :)
 
 class RegisterProfileView(View):
     @method_decorator(login_required)
@@ -417,6 +428,11 @@ class SearchAddPageView(View):
         pages = Page.objects.filter(category=category).order_by('-views')
         return render(request, 'rango/page_listing.html', {'pages': pages})
     
+
+
+# CHAPTER 19 ADDITIONS 
+# Add clicks tracking for pages 
+# Lists clicks of each page next to their title within their designated category block.
 class TrackURLView(View):
     def get(self, request, page_pk):
         print(f"Received page_pk: {page_pk}")  # Debugging to check the pk

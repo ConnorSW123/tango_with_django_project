@@ -1,5 +1,7 @@
 from django.urls import path
 from rango import views
+
+#CHAPTER 14/15 ADDITIONS - Adding Classes structure to Rango's Views
 from rango.views import AboutView, IndexView, AddPageView, ShowCategoryView, GotoUrlView, RegisterProfileView, TrackURLView
 
 
@@ -7,7 +9,7 @@ app_name = 'rango'
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
-    #Updated path that point to the new about class-based view.
+    #Updated path that point to the new about class-based views.
     path('about/', AboutView.as_view(), name='about'),
     path('category/<category_name_slug>/', ShowCategoryView.as_view(), name='show_category'),
     path('add_category/', views.AddCategoryView.as_view(), name='add_category'),

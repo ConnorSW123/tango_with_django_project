@@ -1,7 +1,7 @@
 import json
 import requests
 
-
+#CHAPTER 13 ADDITION
 # Add your Microsoft Accout Key to a file called bing.key
 def read_bing_key():
     """

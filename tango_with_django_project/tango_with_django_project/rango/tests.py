@@ -7,6 +7,12 @@ from rango.models import Page
 import datetime
 
 
+
+# CHAPTER 18 ADDITION
+# How to Use Tests in Django
+# Django also includes functionality to run coverage tests to determine how much of your code is tested.
+
+
 def add_category(name, views=0, likes=0):
     """ Helper function to add a category with the necessary checks. """
     # Ensure that views is non-negative

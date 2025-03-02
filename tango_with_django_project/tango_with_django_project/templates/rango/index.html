@@ -52,7 +52,11 @@
                                 {% for page in pages %} 
                                 <li class="list-group-item">
                                     <a href="{% url 'rango:goto' %}?page_id={{ page.id }}">{{ page.title }}</a>
+                                    {% if page.click_count == 1 %}
+                                    <span class="click-count">({{ page.click_count }} click)</span>
+                                    {% else %}
                                     <span class="click-count">({{ page.click_count }} clicks)</span>
+                                    {% endif %}
                                 </li> 
                             {% endfor %} 
                             </ul>

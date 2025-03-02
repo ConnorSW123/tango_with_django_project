@@ -45,13 +45,16 @@ DEBUG = True
 
 # CHAPTER 19 ADDITION
 #TO DO: Change this to the username of the PythonAnywhere Account we plan on hosting our WebApp.
-# First Item is a PythonAnywhere Hosting URL - Using mine as default/placeholder at the moment.
+# First Item is a PythonAnywhere Hosting URL - Using Connor's as default/placeholder at the moment.
 # Second Item is device port for hosting webapp locally - Do not remove or Webapp will not host locally.
 
 ALLOWED_HOSTS = ['ConnorSweeney.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition
+
+# CHAPTER 14/15 ADDITIONS
+# Adding Registration App to INSTALLED_APPS List.
 
 INSTALLED_APPS = [
     'django.contrib.admin',

@@ -28,6 +28,9 @@ class MyRegistrationView(RegistrationView):
         return reverse('rango:register_profile')
 
 
+#CHAPTER 14/15 ADDITIONS
+#Profile registration within project urls.py
+
   
 
 urlpatterns = [
