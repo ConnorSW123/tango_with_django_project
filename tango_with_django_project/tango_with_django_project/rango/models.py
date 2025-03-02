@@ -35,6 +35,8 @@ class Page(models.Model):
     url = models.URLField() 
     views = models.IntegerField(default=0) 
     last_visit = models.DateTimeField(default=timezone.now)
+    click_count = models.IntegerField(default=0)  # Add click count field
+
 
     class Meta:
         verbose_name_plural = 'pages'

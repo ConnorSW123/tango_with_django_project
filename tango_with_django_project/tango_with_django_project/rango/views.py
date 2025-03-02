@@ -13,6 +13,8 @@ from django.views import View
 from django.contrib.auth.models import User
 from rango.models import UserProfile
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
+
 
 def index(request):
 
@@ -207,19 +209,24 @@ class AddCategoryView(View):
 
 class IndexView(View):
     def get(self, request):
-        # Query the database for categories and pages
+        # Get top 5 categories by likes
         category_list = Category.objects.order_by('-likes')[:5]
+        # Get top 5 pages by views
         page_list = Page.objects.order_by('-views')[:5]
 
         context_dict = {
             'boldmessage': 'Crunchy, creamy, cookie, candy, cupcake!',
             'categories': category_list,
-            'pages': page_list
+            'pages': page_list  # Pass pages to template
         }
 
         visitor_cookie_handler(request)
 
+        # Debugging print
+        print("Pages in context:", [(page.id, page.title) for page in page_list])
+
         return render(request, 'rango/index.html', context_dict)
+
 
 class AddPageView(View):
     @method_decorator(login_required)
@@ -296,6 +303,8 @@ class GotoUrlView(View):
             return redirect(reverse('rango:index'))
 
         selected_page.views = selected_page.views + 1
+        selected_page.click_count = selected_page.click_count + 1
+
         selected_page.save()
 
         return redirect(selected_page.url)
@@ -407,3 +416,13 @@ class SearchAddPageView(View):
 
         pages = Page.objects.filter(category=category).order_by('-views')
         return render(request, 'rango/page_listing.html', {'pages': pages})
+    
+class TrackURLView(View):
+    def get(self, request, page_pk):
+        print(f"Received page_pk: {page_pk}")  # Debugging to check the pk
+        
+        page = get_object_or_404(Page, pk=page_pk)  # Use pk instead of id
+        page.views += 1  # Increment views
+        page.save()  # Save changes
+
+        return redirect(page.url) 

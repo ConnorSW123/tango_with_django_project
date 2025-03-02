@@ -1,6 +1,6 @@
 from django.urls import path
 from rango import views
-from rango.views import AboutView, IndexView, AddPageView, ShowCategoryView, GotoUrlView, RegisterProfileView
+from rango.views import AboutView, IndexView, AddPageView, ShowCategoryView, GotoUrlView, RegisterProfileView, TrackURLView
 
 
 app_name = 'rango'
@@ -22,5 +22,6 @@ urlpatterns = [
     path('profile/<username>/', views.ProfileView.as_view(), name='profile'),
     path('profiles/', views.ListProfilesView.as_view(), name='list_profiles'),
     path('search_add_page/', views.SearchAddPageView.as_view(), name='search_add_page'),
+    path('goto/<int:page_pk>/', TrackURLView.as_view(), name='track_url'),
 
     ]
